@@ -26,11 +26,9 @@ class EmaintReq:
         data_table = []
         print('Now reading data, please wait...')
         for page in pages:
-            get_page = self.session.get(url=f'{table_url}', data=page)
-            # time.sleep(5)
-            page_text = get_page.text
-            load_data = json.loads(page_text)
-            data_table.append(load_data['data']['data'])
+            get_page = self.session.get(url=f'{table_url}', data=page).text
+            load_data = json.loads(get_page)['data']['data']
+            data_table.append(load_data)
         print(f'Scrapped {len(data_table)} pages.')
         return data_table
 
